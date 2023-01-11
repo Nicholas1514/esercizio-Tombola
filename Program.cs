@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -18,9 +19,9 @@ namespace Tombola
             Generacartelle();
             Thread.Sleep(2000);
            
-            Generatorenumeriecontrollotabellone();
+            Generatorenumeri();
             Thread.Sleep(2000);
-
+            Generatoretabellone();
             Thread.Sleep(2000);
             
         }
@@ -160,20 +161,21 @@ namespace Tombola
 
         }
 
-        static void Generatorenumeriecontrollotabellone()
+        static int Generatorenumeri()
         {
-        
+
             Random r = new Random();
-           
-                int n = r.Next(1, 90);
-               
-                Console.WriteLine("Il numero estratto è: " + n);
 
-                Console.WriteLine("\n");
-            
+            int n = r.Next(1, 90);
 
-         
-        
+            Console.WriteLine("Il numero estratto è: " + n);
+
+            Console.WriteLine("\n");
+            return n;
+        } 
+
+         static void Generatoretabellone(ref int n)
+        {
             //generazione tabellone
             int[,] tabellone = new int[9, 10]
             {
@@ -187,7 +189,7 @@ namespace Tombola
                 {71,72,73,74,75,76,77,78,79,80 },
                 {81,82,83,84,85,86,87,88,89,90 },
             };
-       
+
             Console.WriteLine("TABELLONE");
 
 
@@ -195,19 +197,19 @@ namespace Tombola
 
 
             //stampa tabellone
-            
+
             for (int i = 0; i < 9; i++)
             {
-              
+
 
                 for (int j = 0; j < 10; j++)
                 {
-                   
+
                     Console.Write(tabellone[i, j] + " ");
-                    
+
                 }
                 Console.WriteLine();
-               
+
             }
 
 
@@ -222,26 +224,45 @@ namespace Tombola
 
                         Console.SetCursorPosition(0, 26);
                         Console.BackgroundColor = ConsoleColor.Red;
-                        
+
 
                     }
 
                 }
 
-
+             
 
             }
-            //controllo cartelle
-          
+            //controllo cartella 1
+            for(int i = 0; i < 3; i++)
+            {
+                for(int j = 0; j < 9; j++)
+                {
+                    
+                }
+            }
 
+            //controllo cartella 2
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
 
-
-
-
-
-
-
-
+                }
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
     }
-}
+    }
+
