@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,19 +16,13 @@ namespace Tombola
 
 
             Generacartelle();
-            Thread.Sleep(4000);
-            for (int i = 0; i < 10; i++)
-            {
-                Generatorenumeri();
-                Thread.Sleep(4000);
+            Thread.Sleep(2000);
+           
+            Generatorenumeriecontrollotabellone();
+            Thread.Sleep(2000);
 
-                Thread.Sleep(4000);
-            }
-
-
-
-
-
+            Thread.Sleep(2000);
+            
         }
 
 
@@ -38,6 +33,7 @@ namespace Tombola
             int[,] cartella1 = new int[3, 9];
             int[,] cartella2 = new int[3, 9];
             Console.WriteLine("CARTELLA 1" + "\n");
+            //cartella 1
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -87,7 +83,7 @@ namespace Tombola
                 }
 
             }
-
+            // stampa cartella 1
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -98,6 +94,7 @@ namespace Tombola
             }
             Console.WriteLine("\n");
             Console.WriteLine("CARTELLA 2" + "\n");
+            //cartella 2
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -147,6 +144,7 @@ namespace Tombola
                 }
 
             }
+            //stampa cartella 2
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -157,19 +155,26 @@ namespace Tombola
             }
             Console.WriteLine("\n");
 
+      
+
+
         }
 
-        static void Generatorenumeri()
+        static void Generatorenumeriecontrollotabellone()
         {
-            Random r = new Random();
-
-            int n = r.Next(1, 90);
-            Console.WriteLine("Il numero estratto è: " + n);
-
-            Console.WriteLine("\n");
-
         
+            Random r = new Random();
+           
+                int n = r.Next(1, 90);
+               
+                Console.WriteLine("Il numero estratto è: " + n);
 
+                Console.WriteLine("\n");
+            
+
+         
+        
+            //generazione tabellone
             int[,] tabellone = new int[9, 10]
             {
                 {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
@@ -182,36 +187,52 @@ namespace Tombola
                 {71,72,73,74,75,76,77,78,79,80 },
                 {81,82,83,84,85,86,87,88,89,90 },
             };
+       
             Console.WriteLine("TABELLONE");
 
+
+
+
+
+            //stampa tabellone
+            
             for (int i = 0; i < 9; i++)
             {
+              
+
                 for (int j = 0; j < 10; j++)
                 {
-                    if (n == tabellone[i, j])
-                    {
-
-                        Console.BackgroundColor = ConsoleColor.Yellow;
-                        Console.ForegroundColor = ConsoleColor.Red;
-                    }
-
-                }
-
-            }
-
-
-
-
-            for (int i = 0; i < 9; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
+                   
                     Console.Write(tabellone[i, j] + " ");
                     
                 }
                 Console.WriteLine();
+               
             }
-           
+
+
+            //controllo dei numeri sul tabellone (aggiornamento)
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+
+                    if (n == tabellone[i, j])
+                    {
+
+                        Console.SetCursorPosition(0, 26);
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        
+
+                    }
+
+                }
+
+
+
+            }
+            //controllo cartelle
+          
 
 
 
