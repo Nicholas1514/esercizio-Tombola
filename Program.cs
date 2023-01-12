@@ -16,7 +16,7 @@ namespace Tombola
             Console.WriteLine("IL GIOCO DELLA TOMBOLA" + "\n");
             //dichiarazione numeri casuali
             Random r = new Random();
-            int estratti;
+            
 
             Thread.Sleep(2000);
 
@@ -152,13 +152,15 @@ namespace Tombola
             while (true)
             {
                 int n = r.Next(1, 91);
-                int numusciti = 0;
+                
                 Thread.Sleep(2000);
                 Console.WriteLine("\n" + "Il numero estratto è: " + n);
-                numusciti++;
+                
 
-               
+
                 //controllo cartella 1
+                Thread.Sleep(2000);
+                Console.WriteLine("\n" + "CARTELLA 1");
                 for (int i = 0; i < 3; i++)
                 {
                     for (int j = 0; j < 9; j++)
@@ -168,10 +170,16 @@ namespace Tombola
                             
                             Console.ForegroundColor = ConsoleColor.Green;
                         }
+                        Console.Write(cartella1[i, j] + " ");
+                        Console.ResetColor();
                     }
+                    Console.WriteLine("\n" + "_______________" + "\n");
                 }
 
+
                 //controllo cartella 2
+                Thread.Sleep(2000);
+                Console.WriteLine("\n" + "C2");
                 for (int i = 0; i < 3; i++)
                 {
                     for (int j = 0; j < 9; j++)
@@ -180,7 +188,10 @@ namespace Tombola
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
                         }
+                        Console.Write(cartella1[i, j] + " ");
+                        Console.ResetColor();
                     }
+                    Console.WriteLine("\n" + "_______________" + "\n");
                 }
                 //generazione tabellone
                 int[,] tabellone = new int[9, 10];
@@ -203,17 +214,20 @@ namespace Tombola
                     for (int j = 0; j < 10; j++)
                     {
                         //condizione per fare illuminare il numero
-                        if (n == tabellone[i, j])
-                        {
-                            //il numero si illumina di blu 
-                            Console.ForegroundColor = ConsoleColor.DarkBlue;
+                            if (n == tabellone[i, j])
+                            {
+                                //il numero si illumina di blu 
+                                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                            
 
 
 
-                        }
+                            }
 
-                        Console.Write(tabellone[i, j] + " ");
-                        Console.ResetColor();
+                            Console.Write(tabellone[i, j] + " ");
+                            Console.ResetColor();
+                        
+                        
 
 
 
@@ -246,11 +260,13 @@ namespace Tombola
                 {
                     Console.WriteLine("TOMBOLA");
                     Console.WriteLine("Ha vinto la cartella 1");
+                    break;
                 }
                 if (numcartella2 == 0)
                 {
                     Console.WriteLine("TOMBOLA");
                     Console.WriteLine("Ha vinto la cartella 2");
+                    break;
                 }
 
             }
