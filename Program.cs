@@ -14,31 +14,16 @@ namespace Tombola
         static void Main(string[] args)
         {
             Console.WriteLine("IL GIOCO DELLA TOMBOLA" + "\n");
-
-            Thread.Sleep(2000);
-            Generacartelle();
-            Thread.Sleep(2000);
-           
-                int numtabellone = Generatorenumeri();
-                Thread.Sleep(2000);
-                Generatoretabellone(ref numtabellone);
-                Thread.Sleep(2000);
-
-            
-            
-
-
-
-        }
-
-
-        static void Generacartelle()
-        {
+            //dichiarazione numeri casuali
             Random r = new Random();
-            int x = r.Next();
+            int estratti;
+
+            Thread.Sleep(2000);
+
             int[,] cartella1 = new int[3, 9];
             int[,] cartella2 = new int[3, 9];
-            Console.WriteLine("CARTELLA 1" + "\n");
+            Thread.Sleep(2000);
+            Console.WriteLine("\n" + "CARTELLA 1" + "\n");
             //cartella 1
             for (int i = 0; i < 3; i++)
             {
@@ -83,17 +68,19 @@ namespace Tombola
                     cartella1[1, 8] = 0;
                     cartella1[2, 8] = r.Next(80, 90);
 
-                    
+
 
 
                 }
 
             }
+            Thread.Sleep(2000);
             // stampa cartella 1
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 9; j++)
                 {
+
                     Console.Write(cartella1[i, j] + " ");
                 }
                 Console.WriteLine("\n" + "________________________" + "\n");
@@ -144,12 +131,13 @@ namespace Tombola
                     cartella2[1, 8] = 0;
                     cartella2[2, 8] = r.Next(80, 90);
 
-               
+
 
 
                 }
 
             }
+            Thread.Sleep(2000);
             //stampa cartella 2
             for (int i = 0; i < 3; i++)
             {
@@ -160,88 +148,141 @@ namespace Tombola
                 Console.WriteLine("\n" + "_______________________" + "\n");
             }
             Console.WriteLine("\n");
-
-      
-
-
-        }
-
-        static int Generatorenumeri()
-        {
-           
-            Random r = new Random();
-            int n = r.Next(1, 90);
-   
-            return n;
-            
-
-        } 
-
-         static void Generatoretabellone(ref int n)
-        {
-            //generazione tabellone
-            int[,] tabellone = new int[9, 10];
-            int contatore = 1;
-            for( int i = 0; i < 9; i++)
+            //generatore di numeri
+            while (true)
             {
-                for(int j = 0; j < 10; j++)
+                int n = r.Next(1, 91);
+                int numusciti = 0;
+                Thread.Sleep(2000);
+                Console.WriteLine("\n" + "Il numero estratto è: " + n);
+                numusciti++;
+
+               
+                //controllo cartella 1
+                for (int i = 0; i < 3; i++)
                 {
-                    tabellone[i, j] = contatore++;
-                }
-            }
-            Console.WriteLine("\n");
-            Console.WriteLine("TABELLONE");
-
-            //stampa tabellone
-
-            for (int i = 0; i < 9; i++)
-            {
-
-
-                for (int j = 0; j < 10; j++)
-                {
-                    //condizione per fare illuminare il numero
-                    if (n == tabellone[i, j])
+                    for (int j = 0; j < 9; j++)
                     {
-                        //il numero si illumina di blu 
-                        Console.ForegroundColor = ConsoleColor.DarkBlue;
-                   
+                        if (n == cartella1[i, j])
+                        {
+                            
+                            Console.ForegroundColor = ConsoleColor.Green;
+                        }
+                    }
+                }
+
+                //controllo cartella 2
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        if (n == cartella2[i, j])
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                        }
+                    }
+                }
+                //generazione tabellone
+                int[,] tabellone = new int[9, 10];
+                int contatore = 1;
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        tabellone[i, j] = contatore++;
+                    }
+                }
+                Console.WriteLine("\n");
+                Console.WriteLine("TABELLONE");
+                //stampa tabellone
+
+                for (int i = 0; i < 9; i++)
+                {
+
+
+                    for (int j = 0; j < 10; j++)
+                    {
+                        //condizione per fare illuminare il numero
+                        if (n == tabellone[i, j])
+                        {
+                            //il numero si illumina di blu 
+                            Console.ForegroundColor = ConsoleColor.DarkBlue;
+
+
+
+                        }
+
+                        Console.Write(tabellone[i, j] + " ");
+                        Console.ResetColor();
+
+
+
 
                     }
-
-                    Console.Write(tabellone[i, j] + " ");
-                    Console.ResetColor();
-
-
-
+                    Console.WriteLine();
 
                 }
-                Console.WriteLine();
-                
-            }
-            
-           
-
-            //controllo cartella 1
-            for (int i = 0; i < 3; i++)
-            {
-                for(int j = 0; j < 9; j++)
+                //controllo tombola
+                int numcartella1 = 0;
+                int numcartella2 = 0;
+                //cartella1
+                for (int i = 0; i < 3; i++)
                 {
-                    
+                    for (int j = 0; j < 9; j++)
+                    {
+                        numcartella1 = numcartella1 + cartella1[i, j];
+                    }
                 }
-            }
-
-            //controllo cartella 2
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 9; j++)
+                //cartella2
+                for (int i = 0; i < 3; i++)
                 {
-
+                    for (int j = 0; j < 9; j++)
+                    {
+                        numcartella2 = numcartella2 + cartella2[i, j];
+                    }
                 }
+                //condizioni tombola
+                if (numcartella1 == 0)
+                {
+                    Console.WriteLine("TOMBOLA");
+                    Console.WriteLine("Ha vinto la cartella 1");
+                }
+                if (numcartella2 == 0)
+                {
+                    Console.WriteLine("TOMBOLA");
+                    Console.WriteLine("Ha vinto la cartella 2");
+                }
+
             }
 
-           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
+
 
 
 
