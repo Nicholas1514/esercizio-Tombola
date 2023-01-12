@@ -15,15 +15,20 @@ namespace Tombola
         {
             Console.WriteLine("IL GIOCO DELLA TOMBOLA" + "\n");
 
-
+            Thread.Sleep(2000);
             Generacartelle();
             Thread.Sleep(2000);
            
-            Generatorenumeri();
-            Thread.Sleep(2000);
-            Generatoretabellone();
-            Thread.Sleep(2000);
+                int numtabellone = Generatorenumeri();
+                Thread.Sleep(2000);
+                Generatoretabellone(ref numtabellone);
+                Thread.Sleep(2000);
+
             
+            
+
+
+
         }
 
 
@@ -91,7 +96,7 @@ namespace Tombola
                 {
                     Console.Write(cartella1[i, j] + " ");
                 }
-                Console.WriteLine("\n" + "________________________");
+                Console.WriteLine("\n" + "________________________" + "\n");
             }
             Console.WriteLine("\n");
             Console.WriteLine("CARTELLA 2" + "\n");
@@ -152,7 +157,7 @@ namespace Tombola
                 {
                     Console.Write(cartella2[i, j] + " ");
                 }
-                Console.WriteLine("\n" + "_______________________");
+                Console.WriteLine("\n" + "_______________________" + "\n");
             }
             Console.WriteLine("\n");
 
@@ -163,38 +168,29 @@ namespace Tombola
 
         static int Generatorenumeri()
         {
-
+           
             Random r = new Random();
-
             int n = r.Next(1, 90);
-
-            Console.WriteLine("Il numero estratto è: " + n);
-
-            Console.WriteLine("\n");
+   
             return n;
+            
+
         } 
 
          static void Generatoretabellone(ref int n)
         {
             //generazione tabellone
-            int[,] tabellone = new int[9, 10]
+            int[,] tabellone = new int[9, 10];
+            int contatore = 1;
+            for( int i = 0; i < 9; i++)
             {
-                {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
-                {11,12,13,14,15,16,17,18,19,20},
-                {21,22,23,24,25,26,27,28,29,30 },
-                {31,32,33,34,35,36,37,38,39,40 },
-                {41,42,43,44,45,46,47,48,49,50 },
-                {51,52,53,54,55,56,57,58,59,60},
-                {61,62,63,64,65,66,67,68,69,70 },
-                {71,72,73,74,75,76,77,78,79,80 },
-                {81,82,83,84,85,86,87,88,89,90 },
-            };
-
+                for(int j = 0; j < 10; j++)
+                {
+                    tabellone[i, j] = contatore++;
+                }
+            }
+            Console.WriteLine("\n");
             Console.WriteLine("TABELLONE");
-
-
-
-
 
             //stampa tabellone
 
@@ -204,37 +200,30 @@ namespace Tombola
 
                 for (int j = 0; j < 10; j++)
                 {
-
-                    Console.Write(tabellone[i, j] + " ");
-
-                }
-                Console.WriteLine();
-
-            }
-
-
-            //controllo dei numeri sul tabellone (aggiornamento)
-            for (int i = 0; i < 9; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-
+                    //condizione per fare illuminare il numero
                     if (n == tabellone[i, j])
                     {
-
-                        Console.SetCursorPosition(0, 26);
-                        Console.BackgroundColor = ConsoleColor.Red;
-
+                        //il numero si illumina di blu 
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
+                   
 
                     }
 
+                    Console.Write(tabellone[i, j] + " ");
+                    Console.ResetColor();
+
+
+
+
                 }
-
-             
-
+                Console.WriteLine();
+                
             }
+            
+           
+
             //controllo cartella 1
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 for(int j = 0; j < 9; j++)
                 {
@@ -250,6 +239,8 @@ namespace Tombola
 
                 }
             }
+
+           
         }
 
 
